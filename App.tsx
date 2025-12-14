@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { NETWORK_DEVICES } from './constants';
+import { DeviceRole } from './types';
 import { DeviceCard } from './components/DeviceCard';
 import { DhcpModal } from './components/DhcpModal';
 import { Activity, Router, ShieldCheck, Users } from 'lucide-react';
 
 const App: React.FC = () => {
   const [isDhcpModalOpen, setIsDhcpModalOpen] = useState(false);
+
+  // Safely find the main router using the Enum
+  const mainRouter = NETWORK_DEVICES.find(d => d.role === DeviceRole.MAIN_ROUTER);
+  const routerIp = mainRouter?.ip || '192.168.1.1';
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-sky-50">
@@ -94,7 +99,7 @@ const App: React.FC = () => {
       <DhcpModal 
         isOpen={isDhcpModalOpen} 
         onClose={() => setIsDhcpModalOpen(false)} 
-        routerIp={NETWORK_DEVICES.find(d => d.role === 'Main Router (Gateway)')?.ip || '192.168.1.1'} 
+        routerIp={routerIp} 
       />
     </div>
   );
