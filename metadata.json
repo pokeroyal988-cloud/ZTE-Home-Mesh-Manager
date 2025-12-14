@@ -1,0 +1,5 @@
+{
+  "name": "ZTE Home Mesh Manager",
+  "description": "A centralized dashboard to manage home ZTE mesh routers and modems.",
+  "requestFramePermissions": []
+}
